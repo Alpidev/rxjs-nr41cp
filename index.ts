@@ -1,6 +1,7 @@
 import { from, of, Subject } from "rxjs";
 import { Timestamp } from "rxjs/internal/Rx";
 import { map } from "rxjs/operators";
+import { pNode } from "./main";
 
 //from([1,2,3]).subscribe(resp=>console.log(resp));
 
@@ -15,13 +16,16 @@ rr.subscribe(
     if (secondLimit > 60) rr.complete();
 
     if (resp.num === 100) {
-      console.log("centrato 100 in ");
+      pNode.addNodeP("Centrato in " + secondLimit);
 
       console.log(secondLimit);
     }
   },
   error => console.log(error),
-  () => console.log("complete")
+  () => {
+    console.log("complete");
+    pNode.pn().innerText = "complete";
+  }
 );
 
 setInterval(function() {
